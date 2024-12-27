@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hc.dao.ExceptionLogMapper">
+  <resultMap id="BaseResultMap" type="com.hc.entiry.ExceptionLog">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="equipment_id" jdbcType="BIGINT" property="equipmentId" />
+    <result column="exception_time" jdbcType="DATE" property="exceptionTime" />
+    <result column="exception_status" jdbcType="TINYINT" property="exceptionStatus" />
+    <result column="fix_time" jdbcType="DATE" property="fixTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, equipment_id, exception_time, exception_status, fix_time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from exception_log
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from exception_log
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.hc.entiry.ExceptionLog">
+    insert into exception_log (id, equipment_id, exception_time, 
+      exception_status, fix_time)
+    values (#{id,jdbcType=BIGINT}, #{equipmentId,jdbcType=BIGINT}, #{exceptionTime,jdbcType=DATE}, 
+      #{exceptionStatus,jdbcType=TINYINT}, #{fixTime,jdbcType=DATE})
+  </insert>
+  <insert id="insertSelective" parameterType="com.hc.entiry.ExceptionLog">
+    insert into exception_log
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="equipmentId != null">
+        equipment_id,
+      </if>
+      <if test="exceptionTime != null">
+        exception_time,
+      </if>
+      <if test="exceptionStatus != null">
+        exception_status,
+      </if>
+      <if test="fixTime != null">
+        fix_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="equipmentId != null">
+        #{equipmentId,jdbcType=BIGINT},
+      </if>
+      <if test="exceptionTime != null">
+        #{exceptionTime,jdbcType=DATE},
+      </if>
+      <if test="exceptionStatus != null">
+        #{exceptionStatus,jdbcType=TINYINT},
+      </if>
+      <if test="fixTime != null">
+        #{fixTime,jdbcType=DATE},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hc.entiry.ExceptionLog">
+    update exception_log
+    <set>
+      <if test="equipmentId != null">
+        equipment_id = #{equipmentId,jdbcType=BIGINT},
+      </if>
+      <if test="exceptionTime != null">
+        exception_time = #{exceptionTime,jdbcType=DATE},
+      </if>
+      <if test="exceptionStatus != null">
+        exception_status = #{exceptionStatus,jdbcType=TINYINT},
+      </if>
+      <if test="fixTime != null">
+        fix_time = #{fixTime,jdbcType=DATE},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hc.entiry.ExceptionLog">
+    update exception_log
+    set equipment_id = #{equipmentId,jdbcType=BIGINT},
+      exception_time = #{exceptionTime,jdbcType=DATE},
+      exception_status = #{exceptionStatus,jdbcType=TINYINT},
+      fix_time = #{fixTime,jdbcType=DATE}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+  <select id="selectList" resultMap="BaseResultMap">
+    select * from  exception_log
+  </select>
+</mapper>

@@ -1,0 +1,33 @@
+
+IP: 127.0.0.1
+RedisPwd: hxj@2018
+DbUserName: root
+DbPassWord: root
+DbUrl: jdbc:mysql://localhost:3306/lzz?useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai
+
+
+server:
+  port: 8080
+
+spring:
+  redis:
+    host: ${IP}
+    database: 0
+    port: 6379
+    password: ${RedisPwd}
+
+
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: ${DbUserName}
+    password: ${DbPassWord}
+    type: com.alibaba.druid.pool.DruidDataSource
+    url: ${DbUrl}
+
+
+mybatis:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  mapper-locations: classpath*:myBatis/mapper/**/*.xml
+
+
